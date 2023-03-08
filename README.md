@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+## Travel Planner - AI Powered Travel Itinerary Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The goal of this project is to use OpenAI GPT-3 Chat completion to generate a travel itinerary for a user. The user will be able to specify a destination, a trip duration, budget and more. The user will also be able to specify a few activities they would like to do. The Travel Planner will then generate a travel itinerary for the user.
 
-## Available Scripts
+### How to use
 
-In the project directory, you can run:
+1. Clone the repo
 
-### `npm start`
+2. Install the dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Run the app
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. Go to http://localhost:5000/
 
-### `npm test`
+### How it works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app uses OpenAI's GPT-3 API with Altogic Integration to generate the travel itinerary. The app is built using Altogic and React. If you want to learn more about Altogic, check out the [Altogic Documentation](https://altogic.com/docs).
 
-### `npm run build`
+### How to integrate with OpenAI
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Create an account on [OpenAI](https://openai.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Create an API key
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Create an account on [Altogic](https://designer.altogic.com/)
 
-### `npm run eject`
+4. Create a new project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. Create a new endpoint and service with `POST` method and `travel` as the endpoint path.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. Open the service design and click the `Start` node, and define `Request Body` to `Custom Model` and click `Add Field` and select `prompt` as the field name.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+7. Click the `Marketplace` tab and search for `OpenAI Chat Completion` and move it to the design area.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+8. Click the `OpenAI Chat Completion` node and fill the prompt with following code:
 
-## Learn More
+```js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[
+  {
+    "role": "user",
+    "content": {{CONCAT(input.body.prompt, "Format your response using Markdown. Use headings, subheadings, bullet points, and bold to organize the information.")}}
+  }
+]
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
 
-### Code Splitting
+9. Define the `API Key` field with your OpenAI API key.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+10. Connect the `Start` node to the `OpenAI Chat Completion` node.
 
-### Analyzing the Bundle Size
+11. Find the `Return Success Response` node and move it to the design area. Connect the `OpenAI Chat Completion` node to the `Return Success Response` node.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+12. Copy the endpoint URL and paste it in the `.env` file. The .env file should look like this:
 
-### Making a Progressive Web App
+```js
+REACT_APP_ENDPOINT_URL =
+  "https://c3-na.altogic.com/e:6427519d2f0b61e4d9dda50f/travel";
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### How to contribute
 
-### Advanced Configuration
+If you want to contribute to this project, please follow the steps below:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Fork the repo
 
-### Deployment
+2. Create a new branch
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+3. Make your changes
 
-### `npm run build` fails to minify
+4. Create a pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+### Acknowledgments
+
+- [OpenAI](https://openai.com/) for the GPT-3 API
+
+- [Altogic](https://altogic.com/) for the GPT-3 Integration
+
+- [React](https://reactjs.org/) for the frontend
+
+- [Styled Components](https://styled-components.com/) for the styling
+
+```
+
+```
