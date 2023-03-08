@@ -60,7 +60,7 @@ REACT_APP_ENDPOINT_URL =
 
 13. Your service should look like this:
 
-![Service design](https://i.imgur.com/qdkUC3W.png)
+![Service design](https://i.imgur.com/Yq1B5vv.png)
 
 ### How to contribute
 
