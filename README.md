@@ -10,7 +10,7 @@ The goal of this project is to use OpenAI GPT-3 Chat completion to generate a tr
 
 3. Run the app
 
-4. Go to http://localhost:5000/
+4. Go to http://localhost:3000/
 
 ### How it works
 
@@ -87,7 +87,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 - [React](https://reactjs.org/) for the frontend
 
 - [Styled Components](https://styled-components.com/) for the styling
-
-```
-
-```
