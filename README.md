@@ -58,6 +58,10 @@ REACT_APP_ENDPOINT_URL =
   "https://c3-na.altogic.com/e:6427519d2f0b61e4d9dda50f/travel";
 ```
 
+13. Your service should look like this:
+
+![Service design](https://imgur.com/qdkUC3W)
+
 ### How to contribute
 
 If you want to contribute to this project, please follow the steps below:
