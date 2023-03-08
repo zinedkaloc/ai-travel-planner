@@ -399,7 +399,6 @@ const Panel = styled.div`
     flex-basis: calc(40% - 2.2rem);
     width: calc(40% - 2.2rem);
     position: relative;
-    max-height: 100vh;
   }
 
   @media (max-width: 768px) {
