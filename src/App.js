@@ -215,6 +215,12 @@ const ResponseText = styled.div`
     width: calc(100% - 2rem);
     font-size: 0.9rem;
   }
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 const FormGroup = styled.div`
