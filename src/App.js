@@ -221,6 +221,11 @@ const ResponseText = styled.div`
     max-width: 100%;
     height: auto;
   }
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
 `;
 
 const FormGroup = styled.div`
