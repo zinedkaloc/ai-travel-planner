@@ -483,6 +483,37 @@ const InfoText = styled.p`
   color: #fff;
 `;
 
+// Lead form will remove later on
+
+const LeadForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const LeadInput = styled.input`
+  padding: 0.5rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: 2px solid #ccc;
+  font-size: 1.2rem;
+  width: 20rem;
+  margin-bottom: 1rem;
+`;
+
+const LeadButton = styled.button`
+  padding: 0.5rem 1.5rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0069d9;
+  }
+`;
+
 const options = {
   travelStyles: [
     "Cultural",
@@ -587,7 +618,7 @@ const defaultValues = {
   language: options.languages[0].value,
 };
 
-const Main = ({ loading, response }) => (
+const Main = ({ loading, response, handleSubmit, handleChange, email }) => (
   <MainContent>
     <Title>⭐️ Travel Planner ⭐️</Title>
     {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
@@ -603,6 +634,18 @@ const Main = ({ loading, response }) => (
       <Info>
         <InfoTitle>🟠 Status</InfoTitle>
         <InfoText>Down for maintenance. Please try again later.</InfoText>
+        <LeadForm onSubmit={handleSubmit}>
+          <InfoText>We will notify you when it's back up.</InfoText>
+          <LeadInput
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={handleChange}
+            required
+          />
+          <LeadButton type="submit">Submit</LeadButton>
+        </LeadForm>
       </Info>
     </InfoContainer>
 
@@ -814,11 +857,38 @@ const AITravelPlanner = () => {
         setLoading(false);
       });
   };
+  const [email, setEmail] = useState("");
+
+  const handleLeadSubmit = (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    };
+    fetch(
+      "https://c4-na.altogic.com/e:6431cdd646d52b27d865c9da/lead",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+    setEmail("");
+  };
+
+  const handleLeadChange = (event) => {
+    setEmail(event.target.value);
+  };
 
   return (
     <>
       <Container>
-        <Main loading={loading} response={response} />
+        <Main
+          loading={loading}
+          response={response}
+          handleSubmit={handleLeadSubmit}
+          handleChange={handleLeadChange}
+          email={email}
+        />
         <Panel>
           <FormContainer onSubmit={handleSubmit}>
             <Label htmlFor="destinationCountry">Destination Country</Label>
