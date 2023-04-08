@@ -454,6 +454,35 @@ const CuisineType = styled.div`
   }
 `;
 
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+`;
+
+const Info = styled.div`
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #333;
+`;
+
+const InfoTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #fff;
+`;
+
+const InfoText = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+`;
+
 const options = {
   travelStyles: [
     "Cultural",
@@ -562,6 +591,21 @@ const Main = ({ loading, response }) => (
   <MainContent>
     <Title>⭐️ Travel Planner ⭐️</Title>
     {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
+    <InfoContainer>
+      <Info>
+        <InfoText>
+          This is a travel planner that generates a travel itinerary for you.
+          You can choose your destination, budget, interests, and more. The
+          generated itinerary will include a list of places to visit, activities
+          to do, and restaurants to eat at.
+        </InfoText>
+      </Info>
+      <Info>
+        <InfoTitle>🟠 Status</InfoTitle>
+        <InfoText>Down for maintenance. Please try again later.</InfoText>
+      </Info>
+    </InfoContainer>
+
     <ResponseContainer>
       {loading ? <Loading /> : response && <ResponseData response={response} />}
     </ResponseContainer>
