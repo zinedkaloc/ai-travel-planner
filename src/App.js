@@ -635,7 +635,7 @@ const Main = ({ loading, response, handleSubmit, handleChange, email }) => (
         <InfoTitle>🟠 Status</InfoTitle>
         <InfoText>Down for maintenance. Please try again later.</InfoText>
         <LeadForm onSubmit={handleSubmit}>
-          <InfoText>We will notify you when it's back up.</InfoText>
+          <InfoText>Enter your email below to get notified!</InfoText>
           <LeadInput
             type="email"
             name="email"
