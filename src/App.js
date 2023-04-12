@@ -622,32 +622,6 @@ const Main = ({ loading, response, handleSubmit, handleChange, email }) => (
   <MainContent>
     <Title>⭐️ Travel Planner ⭐️</Title>
     {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
-    <InfoContainer>
-      <Info>
-        <InfoText>
-          This is a travel planner that generates a travel itinerary for you.
-          You can choose your destination, budget, interests, and more. The
-          generated itinerary will include a list of places to visit, activities
-          to do, and restaurants to eat at.
-        </InfoText>
-      </Info>
-      <Info>
-        <InfoTitle>🟠 Status</InfoTitle>
-        <InfoText>Down for maintenance. Please try again later.</InfoText>
-        <LeadForm onSubmit={handleSubmit}>
-          <InfoText>Enter your email below to get notified!</InfoText>
-          <LeadInput
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={handleChange}
-            required
-          />
-          <LeadButton type="submit">Submit</LeadButton>
-        </LeadForm>
-      </Info>
-    </InfoContainer>
 
     <ResponseContainer>
       {loading ? <Loading /> : response && <ResponseData response={response} />}
