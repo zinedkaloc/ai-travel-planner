@@ -2,6 +2,10 @@
 
 The goal of this project is to use OpenAI GPT-3 Chat completion to generate a travel itinerary for a user. The user will be able to specify a destination, a trip duration, budget and more. The user will also be able to specify a few activities they would like to do. The Travel Planner will then generate a travel itinerary for the user.
 
+## Getting Started
+
+After cloning the backend from Altogic Marketplace, you can rename .env.example to .env and add your REACT_APP_ENDPOINT_URL to the .env file.
+
 ### How to use
 
 1. Clone the repo
