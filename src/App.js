@@ -454,65 +454,65 @@ const CuisineType = styled.div`
   }
 `;
 
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem;
-`;
+// const InfoContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 2rem;
+// `;
 
-const Info = styled.div`
-  margin: 1rem;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  background-color: #333;
-`;
+// const Info = styled.div`
+//   margin: 1rem;
+//   padding: 2rem;
+//   border-radius: 8px;
+//   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+//   background-color: #333;
+// `;
 
-const InfoTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: #fff;
-`;
+// const InfoTitle = styled.h2`
+//   font-size: 1.5rem;
+//   font-weight: 600;
+//   margin-bottom: 1.5rem;
+//   color: #fff;
+// `;
 
-const InfoText = styled.p`
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: #fff;
-`;
+// const InfoText = styled.p`
+//   font-size: 1.2rem;
+//   margin-bottom: 1.5rem;
+//   color: #fff;
+// `;
 
 // Lead form will remove later on
 
-const LeadForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// const LeadForm = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `;
 
-const LeadInput = styled.input`
-  padding: 0.5rem;
-  border-radius: 0.5rem 0 0 0.5rem;
-  border: 2px solid #ccc;
-  font-size: 1.2rem;
-  width: 20rem;
-  margin-bottom: 1rem;
-`;
+// const LeadInput = styled.input`
+//   padding: 0.5rem;
+//   border-radius: 0.5rem 0 0 0.5rem;
+//   border: 2px solid #ccc;
+//   font-size: 1.2rem;
+//   width: 20rem;
+//   margin-bottom: 1rem;
+// `;
 
-const LeadButton = styled.button`
-  padding: 0.5rem 1.5rem;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
+// const LeadButton = styled.button`
+//   padding: 0.5rem 1.5rem;
+//   background-color: #007bff;
+//   color: #fff;
+//   border-radius: 0.5rem;
+//   border: none;
+//   font-size: 1.2rem;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: #0069d9;
-  }
-`;
+//   &:hover {
+//     background-color: #0069d9;
+//   }
+// `;
 
 const options = {
   travelStyles: [
@@ -524,6 +524,12 @@ const options = {
     "Road Trip",
     "Wildlife Safari",
     "Ski",
+  ],
+  transportationType:[
+    "Bus",
+    "Train",
+    "Car",
+    "Flight"
   ],
   interestsNew: [
     { name: "History", emoji: "🏛️" },
@@ -587,6 +593,7 @@ const options = {
 
   languages: [
     { value: "en", label: "English", icon: "🇺🇸" },
+    { value: "ta", label: "தமிழ்", icon: "🇮🇳" },
     { value: "tr", label: "Türkçe", icon: "🇹🇷" },
     { value: "fr", label: "Français", icon: "🇫🇷" },
     { value: "es", label: "Español", icon: "🇪🇸" },
@@ -599,9 +606,12 @@ const options = {
 };
 
 const topLocations = [
-  { name: "Milano, Italy", value: "Milano/Italy" },
-  { name: "Paris, France", value: "Paris/France" },
-  { name: "Los Angeles, CA", value: "Los Angeles/California" },
+  { name: "Chennai", value: "Chennai" },
+  { name: "Salem, Yercaud", value: "Salem, Yercaud" },
+  { name: "Pondicheery", value: "Pondicheery" },
+  { name: "Kodaikanal", value: "Kodaikanal" },
+  { name: "Kanyakumari", value: "Kanyakumari" },
+  
   // add more top locations as needed
 ];
 
@@ -985,9 +995,32 @@ const AITravelPlanner = () => {
                   ))}
                 </Select>
               </FormGroup>
+
+              <FormGroup>
+                <Label htmlFor="transportationType">Travel Type</Label>
+                <Select
+                  id="transportationType"
+                  name="transportationType"
+                  value={values.transportationType}
+                  onChange={handleChange}
+                >
+                  {options.transportationType.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
             </FormRow>
 
-            <Label htmlFor="transportationType">
+            
+
+
+            
+            
+
+
+            {/* <Label htmlFor="transportationType">
               Transportation Type
               <p
                 style={{
@@ -1007,7 +1040,7 @@ const AITravelPlanner = () => {
               value={values.transportationType}
               onChange={handleChange}
               required
-            />
+            /> */}
 
             <Label htmlFor="activityType">
               Activity Type
