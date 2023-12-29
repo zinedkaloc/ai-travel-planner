@@ -813,8 +813,7 @@ const AITravelPlanner = () => {
     e.preventDefault();
     setLoading(true);
     let prompt = `Generate a personalized travel itinerary for a trip to ${values.destinationCountry} with a budget of ${values.budget}. The traveler is interested in a ${values.travelStyle} vacation and enjoys ${values.interestsNew}. They are looking for ${values.accommodationType} accommodations and prefer ${values.transportationType} transportation. The itinerary should include ${values.activityType} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. The itinerary should be written in ${values.language}. `;
-
-    fetch(`${process.env.REACT_APP_ENDPOINT_URL}`, {
+    fetch("http://localhost:8000/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -834,6 +833,7 @@ const AITravelPlanner = () => {
   const [email, setEmail] = useState("");
 
   const handleLeadSubmit = (event) => {
+    console.log(event);
     event.preventDefault();
     const requestOptions = {
       method: "POST",
