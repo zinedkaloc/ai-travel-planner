@@ -1,24 +1,18 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import {
-  ActionButton,
-  ButtonContainer,
-  ResponseContainer,
-  ResponseText,
-  ResponseTitle,
-} from "./Styles";
 
- const ResponseData = ({ response }) => {
+const ResponseData = ({ response }) => {
   return (
-    <ResponseContainer>
-      <ResponseTitle>
+    <div className="bg-gray-200 p-4 rounded-lg shadow-md">
+      <h2 className="text-xl font-bold mb-4">
         <span role="img" aria-label="emoji"></span> Your travel plan is ready 🎉
-      </ResponseTitle>
-      <ResponseText>
+      </h2>
+      <div className="mb-4">
         <ReactMarkdown>{response}</ReactMarkdown>
-      </ResponseText>
-      <ButtonContainer>
-        <ActionButton
+      </div>
+      <div className="flex justify-end">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           onClick={() => {
             const blob = new Blob([response], {
               type: "text/plain;charset=utf-8",
@@ -35,9 +29,10 @@ import {
           }}
         >
           Download
-        </ActionButton>
-      </ButtonContainer>
-    </ResponseContainer>
+        </button>
+      </div>
+    </div>
   );
 };
+
 export default ResponseData;

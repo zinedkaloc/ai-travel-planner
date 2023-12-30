@@ -1,31 +1,10 @@
-import { options, topLocations } from './Data';
-import { GenerateButton } from './Button';
+import { options, topLocations } from "./Data";
+import GenerateButton from "./Button";
 
 import React, { useState } from "react";
-import {
-  Container,
-  CuisineType,
-  CuisineTypesContainer,
-  FormContainer,
-  FormGroup,
-  FormRow,
-  Input,
-  InterestEmoji,
-  InterestItemNew,
-  InterestName,
-  InterestsContainerNew,
-  Label,
-  LanguageOption,
-  LanguageRow,
-  LanguageSelectorContainer,
-  Panel,
-  PinButton,
-  Select,
-  TopLocationContainer,
-} from "./Styles";
-import Main from './Main';
 
-
+import Main from "./Main";
+import { PinButton } from "./Styles";
 
 const defaultValues = {
   destinationCountry: "",
@@ -39,11 +18,6 @@ const defaultValues = {
   tripDuration: "3",
   language: options.languages[0].value,
 };
-
-
-
-
-
 
 const AITravelPlanner = () => {
   const [loading, setLoading] = useState(false);
@@ -165,9 +139,11 @@ const AITravelPlanner = () => {
 
   const handleMultiSelectChange = (e) => {
     const { name, options } = e.target;
+    console.log(name,options);
     const selectedOptions = [];
     for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
+        console.log(options[i].value);
         selectedOptions.push(options[i].value);
       }
     }
@@ -189,13 +165,14 @@ const AITravelPlanner = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    let prompt = `Generate a personalized travel itinerary for a trip to ${values.destinationCountry} with a budget of ${values.budget}. The traveler is interested in a ${values.travelStyle} vacation and enjoys ${values.interestsNew}. They are looking for ${values.accommodationType} accommodations and prefer ${values.transportationType} transportation. The itinerary should include ${values.activityType} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. The itinerary should be written in ${values.language}. `;
+    let prompt = `Generate a personalized travel itinerary for a trip to ${values.destinationCountry} with a budget of ${values.budget}. The traveler is interested in a ${values.travelStyle} vacation and enjoys ${values.interestsNew}. They are looking for ${values.accommodationType} accommodations and prefer ${values.transportationType} transportation. The itinerary should include ${values.activityType || ''} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. The itinerary should be written in ${values.language}. `;
+    console.log(prompt);
     fetch("https://travelai-91rf.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: prompt,city:values.destinationCountry }),
+      body: JSON.stringify({ prompt: prompt, city: values.destinationCountry }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -232,18 +209,20 @@ const AITravelPlanner = () => {
 
   return (
     <>
-      <Container>
-        <Main
-          loading={loading}
-          response={response}
-          handleSubmit={handleLeadSubmit}
-          handleChange={handleLeadChange}
-          email={email}
-        />
-        <Panel>
-          <FormContainer onSubmit={handleSubmit}>
-            <Label htmlFor="destinationCountry">Destination Country</Label>
-            <Input
+      <div className="container flex w-full h-screen justify-between ">
+      <div className="w-3/4 p-6">
+          <Main
+            loading={loading}
+            response={response}
+            handleSubmit={handleLeadSubmit}
+            handleChange={handleLeadChange}
+            email={email}
+          />
+        </div>
+        <div className="w-1/4 p-6">
+          <form className="formContainer" onSubmit={handleSubmit}>
+            <label htmlFor="destinationCountry">Destination Country</label>
+            <input
               type="text"
               placeholder="e.g. San Francisco/USA, Paris/France, Istanbul/Turkey, etc."
               id="destinationCountry"
@@ -252,20 +231,24 @@ const AITravelPlanner = () => {
               onChange={handleChange}
               required
             />
-            <TopLocationContainer>
-              <Label htmlFor="topDestinations">🔥Top Destionations:</Label>
+            <div >
+              <label htmlFor="topDestinations">🔥Top Destionations:</label>
+              <div className="button">
               {topLocations.map((location) => (
-                <PinButton
+                <div
                   key={location.value}
                   onClick={() => handleLocationClick(location)}
+                  
                 >
                   {location.name}
-                </PinButton>
+                </div>
+                
               ))}
-            </TopLocationContainer>
-            <FormRow>
-              <FormGroup>
-                <Label htmlFor="budget">
+              </div>
+            </div>
+            <div className="row">
+              <div className="form-group">
+                <label htmlFor="budget">
                   Budget
                   <p
                     style={{
@@ -276,8 +259,8 @@ const AITravelPlanner = () => {
                   >
                     (with currency)
                   </p>
-                </Label>
-                <Input
+                </label>
+                <input
                   type="text"
                   placeholder="e.g. $1000 USD, 1000 EUR, etc."
                   id="budget"
@@ -286,9 +269,9 @@ const AITravelPlanner = () => {
                   onChange={handleChange}
                   required
                 />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="tripDuration">
+              </div>
+              <div className="form-group">
+                <label htmlFor="tripDuration">
                   Trip Duration
                   <p
                     style={{
@@ -299,8 +282,8 @@ const AITravelPlanner = () => {
                   >
                     (in days)
                   </p>
-                </Label>
-                <Input
+                </label>
+                <input
                   type="number"
                   id="tripDuration"
                   name="tripDuration"
@@ -308,33 +291,31 @@ const AITravelPlanner = () => {
                   onChange={handleChange}
                   required
                 />
-              </FormGroup>
-            </FormRow>
-            <Label htmlFor="interests">Interests</Label>
-            <InterestsContainerNew>
+              </div>
+            </div>
+            <label htmlFor="interests">Interests</label>
+            <div className="flex items-center flex-wrap p-2 ">
               {options.interestsNew.map((interest, index) => (
-                <InterestItemNew
+                <div
                   key={index}
                   className={
-                    selectedInterests.includes(interest.name) ? "selected" : ""
+                    selectedInterests.includes(interest?.name) ? "selected" : ""
                   }
                   onClick={() => {
                     handleInterestClick(interest.name);
                   }}
                   value={interest}
                 >
-                  <InterestEmoji aria-label="emoji">
-                    {interest.emoji}
-                  </InterestEmoji>
-                  <InterestName>{interest.name}</InterestName>
-                </InterestItemNew>
+                  <span aria-label="emoji">{interest.emoji}</span>
+                  <span>{interest.name}</span>
+                </div>
               ))}
-            </InterestsContainerNew>
+            </div>
 
-            <FormRow>
-              <FormGroup>
-                <Label htmlFor="accommodationType">Accommodation</Label>
-                <Select
+            <div className="row">
+              <div className="form-group">
+                <label htmlFor="accommodationType">Accommodation</label>
+                <select
                   id="accommodationType"
                   name="accommodationType"
                   value={values.accommodationType}
@@ -345,11 +326,11 @@ const AITravelPlanner = () => {
                       {option}
                     </option>
                   ))}
-                </Select>
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="travelStyle">Travel Style</Label>
-                <Select
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="travelStyle">Travel Style</label>
+                <select
                   id="travelStyle"
                   name="travelStyle"
                   value={values.travelStyle}
@@ -360,11 +341,11 @@ const AITravelPlanner = () => {
                       {option}
                     </option>
                   ))}
-                </Select>
-              </FormGroup>
-            </FormRow>
+                </select>
+              </div>
+            </div>
 
-            <Label htmlFor="transportationType">
+            <label htmlFor="transportationType">
               Transportation Type
               <p
                 style={{
@@ -376,8 +357,8 @@ const AITravelPlanner = () => {
               >
                 (e.g. car, train, bus, etc.)
               </p>
-            </Label>
-            <Input
+            </label>
+            <input
               type="text"
               id="transportationType"
               name="transportationType"
@@ -386,7 +367,7 @@ const AITravelPlanner = () => {
               required
             />
 
-            <Label htmlFor="activityType">
+            <label htmlFor="activityType">
               Activity Type
               <p
                 style={{
@@ -398,8 +379,8 @@ const AITravelPlanner = () => {
               >
                 (select multiple options)
               </p>
-            </Label>
-            <Select
+            </label>
+            <select
               id="activityType"
               name="activityType"
               multiple
@@ -411,11 +392,11 @@ const AITravelPlanner = () => {
                   {option}
                 </option>
               ))}
-            </Select>
-            <Label htmlFor="cuisineType">Cuisine Type</Label>
-            <CuisineTypesContainer>
+            </select>
+            <label htmlFor="cuisineType">Cuisine Type</label>
+            <div className="flex flex-wrap">
               {options.cuisineTypes.map((cuisineType) => (
-                <CuisineType
+                <div
                   multiple
                   value={values.cuisineType}
                   onChange={handleMultiSelectChange}
@@ -436,15 +417,15 @@ const AITravelPlanner = () => {
                   <br />
 
                   <span>{cuisineType.name}</span>
-                </CuisineType>
+                </div>
               ))}
-            </CuisineTypesContainer>
+            </div>
 
-            <LanguageSelectorContainer>
-              <Label>Language</Label>
-              <LanguageRow>
+            <div>
+              <label>Language</label>
+              <div className="flex flex-wrap">
                 {options.languages.map((option) => (
-                  <LanguageOption
+                  <option
                     key={option.value}
                     onClick={() => {
                       handleLanguageClick(option);
@@ -457,19 +438,19 @@ const AITravelPlanner = () => {
                     <span role="img" aria-label={option.label}>
                       {option.icon}
                     </span>
-                  </LanguageOption>
+                  </option>
                 ))}
-              </LanguageRow>
-            </LanguageSelectorContainer>
+              </div>
+            </div>
             <GenerateButton
               loading={loading}
               type="submit"
               disabled={loading}
               className={loading ? "loading" : ""}
             ></GenerateButton>
-          </FormContainer>
-        </Panel>
-      </Container>
+          </form>
+        </div>
+      </div>
     </>
   );
 };

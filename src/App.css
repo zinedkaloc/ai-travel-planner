@@ -1,0 +1,120 @@
+/* src/styles/tailwind.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Apply styles to the form container */
+.formContainer {
+    min-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff; /* Set background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    border-radius: 8px;
+}
+
+/* Style form labels */
+.formContainer label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333; /* Adjust text color */
+    font-weight: bold; /* Add bold font weight */
+}
+
+/* Style form inputs */
+.formContainer input,
+.formContainer select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc; /* Add a border color */
+    border-radius: 4px;
+}
+
+/* Style the Top Destinations label */
+.formContainer label[for="topDestinations"] {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333; /* Adjust text color */
+}
+
+/* Style the Top Destinations PinButton */
+.formContainer .row .form-group .PinButton {
+    /* Add styles as needed */
+}
+
+/* Style the Interest options */
+.formContainer label[for="interests"] {
+    margin-bottom: 0.5rem;
+}
+
+/* Style the Interest div */
+.formContainer div span {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/* Style the Transportation Type input */
+.formContainer input#transportationType {
+    /* Add styles as needed */
+}
+
+/* Style the Activity Type select */
+.formContainer select#activityType {
+    height: 100px; /* Adjust the height as needed */
+}
+
+/* Style the Cuisine Type options */
+.formContainer label[for="cuisineType"] {
+    margin-bottom: 0.5rem;
+}
+
+/* Style the Cuisine Type div */
+.formContainer div span {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/* Style the Language options */
+.formContainer label[for="language"] {
+    margin-bottom: 0.5rem;
+}
+
+/* Style the Language option */
+.formContainer div option {
+    cursor: pointer;
+}
+
+/* Style the GenerateButton */
+.formContainer .GenerateButton {
+    background-color: #0080ff; /* Set background color */
+    color: #fff; /* Set text color */
+    padding: 0.75rem 1.5rem; /* Adjust padding */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem; /* Adjust font size */
+}
+
+.formContainer .GenerateButton:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+@layer components {
+    .button {
+      @apply flex bg-red-50 items-center justify-center p-4 text-xs font-semibold 
+      leading-none 
+      text-black border border-none rounded-full
+       cursor-pointer transition duration-200 ease-in-out bg-white;
+    }
+  
+    .button::before {
+      content: '📍';
+      @apply mr-1 left-8 top-8;
+    }
+  
+    .button:hover {
+      @apply bg-gray-100 border border-gray-300;
+    }
+  }
+  
