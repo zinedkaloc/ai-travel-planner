@@ -314,7 +314,7 @@ const AITravelPlanner = () => {
               </div>
               <div>
                 <label htmlFor="interests">Interests</label>
-                <div className="flex items-center flex-wrap p-2 ">
+                <div className="flex flex-row flex-wrap space-x-1">
                   {options.interestsNew.map((interest, index) => (
                     <div
                       key={index}
@@ -421,7 +421,7 @@ const AITravelPlanner = () => {
 
               <div>
                 <label htmlFor="cuisineType">Cuisine Type</label>
-                <div className="flex flex-wrap">
+                <div className="flex flex-row flex-wrap space-x-1">
                   {options.cuisineTypes.map((cuisineType) => (
                     <div
                       multiple
@@ -451,7 +451,7 @@ const AITravelPlanner = () => {
 
               <div>
                 <label>Language</label>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap text-2xl">
                   {options.languages.map((option) => (
                     <option
                       key={option.value}
