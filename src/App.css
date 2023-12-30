@@ -5,12 +5,13 @@
 
 /* Apply styles to the form container */
 .formContainer {
-    min-width: 400px; /* Adjust the maximum width as needed */
+    min-width: 300px; /* Adjust the maximum width as needed */
     margin: 0 auto;
     padding: 2rem;
     background-color: #fff; /* Set background color */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
     border-radius: 8px;
+    margin-right: 10px;
 }
 
 /* Style form labels */
