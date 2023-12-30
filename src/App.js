@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import styled from "styled-components";
 
+import ImageViewer from "./ImageList";
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -618,24 +620,26 @@ const defaultValues = {
   language: options.languages[0].value,
 };
 
-const Main = ({ loading, response, handleSubmit, handleChange, email }) => (
+const Main = ({ loading, response, images, handleSubmit, handleChange, email }) => (
   <MainContent>
     <Title>⭐️ Travel Planner ⭐️</Title>
     {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
 
     <ResponseContainer>
-      {loading ? <Loading /> : response && <ResponseData response={response} />}
+      {loading ? <Loading /> : response && <ResponseData response={response}  images={images}/>}
     </ResponseContainer>
   </MainContent>
 );
 
-const ResponseData = ({ response }) => {
+const ResponseData = ({ response,images }) => {
   return (
+    
     <ResponseContainer>
       <ResponseTitle>
         <span role="img" aria-label="emoji"></span> Your travel plan is ready 🎉
       </ResponseTitle>
       <ResponseText>
+        <ImageViewer images={images}></ImageViewer>
         <ReactMarkdown>{response}</ReactMarkdown>
       </ResponseText>
       <ButtonContainer>
@@ -677,7 +681,7 @@ const AITravelPlanner = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(
     options.languages[0]
   );
-
+  const [images, setImages] = useState([]);
   const handleCuisineTypeClick = (cuisineType) => {
     if (selectedCuisineTypes.includes(cuisineType)) {
       setSelectedCuisineTypes(
@@ -813,16 +817,18 @@ const AITravelPlanner = () => {
     e.preventDefault();
     setLoading(true);
     let prompt = `Generate a personalized travel itinerary for a trip to ${values.destinationCountry} with a budget of ${values.budget}. The traveler is interested in a ${values.travelStyle} vacation and enjoys ${values.interestsNew}. They are looking for ${values.accommodationType} accommodations and prefer ${values.transportationType} transportation. The itinerary should include ${values.activityType} activities and ${values.cuisineType} dining options. Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. The itinerary should be written in ${values.language}. `;
-    fetch("http://localhost:8000/chat", {
+
+    fetch("https://travelai-91rf.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: prompt }),
+      body: JSON.stringify({ prompt: prompt,city: values.destinationCountry}),
     })
       .then((response) => response.json())
       .then((data) => {
-        setResponse(data.choices[0].message.content);
+        setResponse(data.response.choices[0].message.content);
+        setImages(data.images);
         setLoading(false);
       })
       .catch((error) => {
@@ -833,7 +839,6 @@ const AITravelPlanner = () => {
   const [email, setEmail] = useState("");
 
   const handleLeadSubmit = (event) => {
-    console.log(event);
     event.preventDefault();
     const requestOptions = {
       method: "POST",
@@ -859,6 +864,7 @@ const AITravelPlanner = () => {
         <Main
           loading={loading}
           response={response}
+          images={images}
           handleSubmit={handleLeadSubmit}
           handleChange={handleLeadChange}
           email={email}
