@@ -3,6 +3,7 @@ import { options, topLocations } from "./Components/Data";
 import GenerateButton from "./Components/Button";
 import Main from "./Components/Main";
 import Header from "./Components/Header";
+import { Link } from "react-router-dom";
 
 const defaultValues = {
   destinationCountry: "",
@@ -251,193 +252,201 @@ const AITravelPlanner = () => {
                 required
               />
               <div>
-                <label htmlFor="topDestinations">🔥Top Destionations:</label>
-                <div className="button">
+                <label
+                  htmlFor="topDestinations"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  🔥 Top Destinations:
+                </label>
+                <div className="space-y-2">
                   {topLocations.map((location) => (
-                    <div
+                    <button
                       key={location.value}
+                      type="button"
                       onClick={() => handleLocationClick(location)}
+                      className={`inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
                     >
                       {location.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="budget"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Budget
+                  <span className="ml-1 inline-block text-xs text-gray-500">
+                    (with currency)
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  id="budget"
+                  name="budget"
+                  value={values.budget}
+                  onChange={handleChange}
+                  placeholder="e.g. $1000 USD, 1000 EUR, etc."
+                  className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="tripDuration"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Trip Duration
+                  <span className="ml-1 inline-block text-xs text-gray-500">
+                    (in days)
+                  </span>
+                </label>
+                <input
+                  type="number"
+                  id="tripDuration"
+                  name="tripDuration"
+                  value={values.tripDuration}
+                  onChange={handleChange}
+                  className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="interests">Interests</label>
+                <div className="flex items-center flex-wrap p-2 ">
+                  {options.interestsNew.map((interest, index) => (
+                    <div
+                      key={index}
+                      className={
+                        selectedInterests.includes(interest?.name)
+                          ? "selected"
+                          : ""
+                      }
+                      onClick={() => {
+                        handleInterestClick(interest.name);
+                      }}
+                      value={interest}
+                    >
+                      <span aria-label="emoji">{interest.emoji}</span>
+                      <span>{interest.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="row">
-                <div className="form-group">
-                  <label htmlFor="budget">
-                    Budget
-                    <p
-                      style={{
-                        display: "inline-block",
-                        color: "#666",
-                        fontSize: "10px",
-                      }}
-                    >
-                      (with currency)
-                    </p>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. $1000 USD, 1000 EUR, etc."
-                    id="budget"
-                    name="budget"
-                    value={values.budget}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="tripDuration">
-                    Trip Duration
-                    <p
-                      style={{
-                        display: "inline-block",
-                        color: "#666",
-                        fontSize: "10px",
-                      }}
-                    >
-                      (in days)
-                    </p>
-                  </label>
-                  <input
-                    type="number"
-                    id="tripDuration"
-                    name="tripDuration"
-                    value={values.tripDuration}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <label htmlFor="interests">Interests</label>
-              <div className="flex items-center flex-wrap p-2 ">
-                {options.interestsNew.map((interest, index) => (
-                  <div
-                    key={index}
-                    className={
-                      selectedInterests.includes(interest?.name)
-                        ? "selected"
-                        : ""
-                    }
-                    onClick={() => {
-                      handleInterestClick(interest.name);
-                    }}
-                    value={interest}
-                  >
-                    <span aria-label="emoji">{interest.emoji}</span>
-                    <span>{interest.name}</span>
-                  </div>
-                ))}
-              </div>
 
-              <div className="row">
-                <div className="form-group">
-                  <label htmlFor="accommodationType">Accommodation</label>
-                  <select
-                    id="accommodationType"
-                    name="accommodationType"
-                    value={values.accommodationType}
-                    onChange={handleChange}
-                  >
-                    {options.accommodationTypes.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="travelStyle">Travel Style</label>
-                  <select
-                    id="travelStyle"
-                    name="travelStyle"
-                    value={values.travelStyle}
-                    onChange={handleChange}
-                  >
-                    {options.travelStyles.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <label htmlFor="transportationType">
-                Transportation Type
-                <p
-                  style={{
-                    display: "inline-block",
-                    fontSize: "10px",
-
-                    color: "#666",
-                  }}
+              <div>
+                <label htmlFor="accommodationType">Accommodation</label>
+                <select
+                  id="accommodationType"
+                  name="accommodationType"
+                  value={values.accommodationType}
+                  onChange={handleChange}
                 >
-                  (e.g. car, train, bus, etc.)
-                </p>
-              </label>
-              <input
-                type="text"
-                id="transportationType"
-                name="transportationType"
-                value={values.transportationType}
-                onChange={handleChange}
-                required
-              />
-
-              <label htmlFor="activityType">
-                Activity Type
-                <p
-                  style={{
-                    display: "inline-block",
-                    fontSize: "10px",
-
-                    color: "#666",
-                  }}
+                  {options.accommodationTypes.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="travelStyle">Travel Style</label>
+                <select
+                  id="travelStyle"
+                  name="travelStyle"
+                  value={values.travelStyle}
+                  onChange={handleChange}
                 >
-                  (select multiple options)
-                </p>
-              </label>
-              <select
-                id="activityType"
-                name="activityType"
-                multiple
-                value={values.activityType}
-                onChange={handleMultiSelectChange}
-              >
-                {options.activityTypes.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="cuisineType">Cuisine Type</label>
-              <div className="flex flex-wrap">
-                {options.cuisineTypes.map((cuisineType) => (
-                  <div
-                    multiple
-                    value={values.cuisineType}
-                    onChange={handleMultiSelectChange}
-                    key={cuisineType.name}
-                    className={
-                      selectedCuisineTypes.includes(cuisineType.name)
-                        ? "selected"
-                        : ""
-                    }
-                    onClick={() => {
-                      handleCuisineTypeClick(cuisineType.name);
+                  {options.travelStyles.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="transportationType">
+                  Transportation Type
+                  <p
+                    style={{
+                      display: "inline-block",
+                      fontSize: "10px",
+
+                      color: "#666",
                     }}
                   >
-                    <span role="img" aria-label={cuisineType.name}>
-                      {cuisineType.emoji}
-                    </span>
+                    (e.g. car, train, bus, etc.)
+                  </p>
+                </label>
+                <input
+                  type="text"
+                  id="transportationType"
+                  name="transportationType"
+                  value={values.transportationType}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                    <br />
+              <div>
+                <label htmlFor="activityType">
+                  Activity Type
+                  <p
+                    style={{
+                      display: "inline-block",
+                      fontSize: "10px",
 
-                    <span>{cuisineType.name}</span>
-                  </div>
-                ))}
+                      color: "#666",
+                    }}
+                  >
+                    (select multiple options)
+                  </p>
+                </label>
+                <select
+                  id="activityType"
+                  name="activityType"
+                  multiple
+                  value={values.activityType}
+                  onChange={handleMultiSelectChange}
+                >
+                  {options.activityTypes.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="cuisineType">Cuisine Type</label>
+                <div className="flex flex-wrap">
+                  {options.cuisineTypes.map((cuisineType) => (
+                    <div
+                      multiple
+                      value={values.cuisineType}
+                      onChange={handleMultiSelectChange}
+                      key={cuisineType.name}
+                      className={
+                        selectedCuisineTypes.includes(cuisineType.name)
+                          ? "selected"
+                          : ""
+                      }
+                      onClick={() => {
+                        handleCuisineTypeClick(cuisineType.name);
+                      }}
+                    >
+                      <span role="img" aria-label={cuisineType.name}>
+                        {cuisineType.emoji}
+                      </span>
+
+                      <br />
+
+                      <span>{cuisineType.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div>
@@ -468,6 +477,13 @@ const AITravelPlanner = () => {
                 className={loading ? "loading" : ""}
               ></GenerateButton>
             </form>
+          </div>
+        </div>
+        <div className="fixed bottom-0 w-full bg-white p-4">
+          <div className="container mx-auto">
+            <Link to="/" className="text-lg font-bold text-blue-500">
+              Back to Home
+            </Link>
           </div>
         </div>
       </div>

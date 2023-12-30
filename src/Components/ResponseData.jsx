@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 
 const ResponseData = ({ response }) => {
   return (
-    <div className="bg-gray-200 p-4 rounded-lg shadow-md">
+    <div className=" p-4 rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4">
         <span role="img" aria-label="emoji"></span> Your travel plan is ready 🎉
       </h2>

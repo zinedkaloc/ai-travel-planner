@@ -26,7 +26,7 @@
 .formContainer input,
 .formContainer select {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.65rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc; /* Add a border color */
     border-radius: 4px;
@@ -88,7 +88,7 @@
 
 /* Style the GenerateButton */
 .formContainer .GenerateButton {
-    background-color: #0080ff; /* Set background color */
+    background-color: #9429a0; /* Set background color */
     color: #fff; /* Set text color */
     padding: 0.75rem 1.5rem; /* Adjust padding */
     border: none;
@@ -98,9 +98,74 @@
 }
 
 .formContainer .GenerateButton:hover {
-    background-color: #0056b3; /* Change background color on hover */
+    background-color: #9429a0; /* Change background color on hover */
+}
+/* Style headings */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Style paragraphs */
+p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Style lists */
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+/* Style list items */
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Style the note paragraph */
+.note {
+    color: #666;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+}
 @layer components {
     .button {
       @apply flex bg-red-50 items-center justify-center p-4 text-xs font-semibold 
