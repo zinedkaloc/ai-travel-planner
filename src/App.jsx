@@ -1,10 +1,8 @@
-import { options, topLocations } from "./Data";
-import GenerateButton from "./Button";
 
 import React, { useState } from "react";
-
-import Main from "./Main";
-import { PinButton } from "./Styles";
+import { options, topLocations } from "./Components/Data";
+import GenerateButton  from "./Components/Button"
+import Main from "./Components/Main";
 
 const defaultValues = {
   destinationCountry: "",
